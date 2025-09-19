@@ -33,3 +33,127 @@ iot-dashboard/
 │── frontend/         # React dashboard UI
 │── grafana/          # Dashboard JSON file
 │── README.md
+
+⚙️ Setup & Run Locally
+1️⃣ Clone Repository
+git clone https://github.com/your-username/iot-dashboard.git
+cd iot-dashboard
+This launches:
+
+Backend (FastAPI) → http://localhost:8000
+
+Frontend (React) → http://localhost:3000
+
+InfluxDB → http://localhost:8086
+
+Grafana → http://localhost:3001
+
+3️⃣ Verify InfluxDB Data
+
+Login: http://localhost:8086
+
+User: admin
+
+Pass: admin***
+
+Org: my-org
+
+Bucket: iot_data
+
+Run in Data Explorer:
+
+from(bucket: "iot_data")
+  |> range(start: -5m)
+
+📊 Grafana Dashboard
+Import Dashboard
+
+Open Grafana → http://localhost:3001 (admin / admin).
+
+Go to Dashboards → Import.
+
+Paste the JSON below in “Import via panel json”.
+
+Select InfluxDB datasource when asked.
+
+JSON FILE:
+  {
+  "id": null,
+  "title": "IoT Realtime Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Temperature Over Time",
+      "datasource": null,
+      "targets": [
+        {
+          "query": "from(bucket: \"iot_data\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"iot_measurement\" and r._field == \"temperature\")",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Humidity Over Time",
+      "datasource": null,
+      "targets": [
+        {
+          "query": "from(bucket: \"iot_data\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"iot_measurement\" and r._field == \"humidity\")",
+          "refId": "B"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Truck Speed",
+      "datasource": null,
+      "targets": [
+        {
+          "query": "from(bucket: \"iot_data\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"iot_measurement\" and r._field == \"speed\")",
+          "refId": "C"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 }
+    },
+    {
+      "type": "geomap",
+      "title": "Truck Locations",
+      "datasource": null,
+      "targets": [
+        {
+          "query": "from(bucket: \"iot_data\") |> range(start: -15m) |> filter(fn: (r) => r._measurement == \"iot_measurement\" and (r._field == \"lat\" or r._field == \"lon\"))",
+          "refId": "D"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+      "options": {
+        "view": { "lat": 37.77, "lon": -122.42, "zoom": 11 },
+        "basemap": { "type": "osm" }
+      }
+    }
+  ]
+}
+
+
+⚡ Alerts
+
+In Grafana:
+
+Open Temperature panel → Edit → Alerts.
+
+Add condition:
+
+avg() of temperature > 75°F for 5m.
+
+Configure notification channel (email, Slack, etc.).
+
+
+📜 License
+
+MIT License. Free to use & modify.
