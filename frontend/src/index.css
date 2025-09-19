@@ -1,0 +1,70 @@
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f3f6fb;
+  color: #1f2937;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 320px 1fr 360px;
+  gap: 12px;
+  height: 100vh;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.panel {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+  overflow: auto;
+}
+
+.header {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.device {
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.device.online { background: #eef2ff; }
+.device.offline { background: #fff7ed; }
+
+.alert {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: white;
+  font-weight: 600;
+}
+
+.alert.critical { background: #ef4444; animation: blink 1s linear infinite; }
+.alert.warning { background: #f59e0b; animation: blink 1.2s linear infinite; }
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+/* map container style */
+.map-container {
+  height: calc(100vh - 40px);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* chart container */
+.chart-area {
+  height: 220px;
+}
