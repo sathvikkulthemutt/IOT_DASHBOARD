@@ -1,0 +1,35 @@
+📊 IoT Real-Time Dashboard
+
+A fully functional IoT dashboard that simulates factory and logistics IoT devices.
+It provides real-time alerts via React frontend and historical analytics via InfluxDB + Grafana.
+
+🚀 Features
+
+🌡️ Temperature & Humidity Monitoring
+
+🚚 Logistics Tracking (GPS + Speed)
+
+⚡ Real-Time Alerts (threshold-based)
+
+📈 Historical Visualization with Grafana dashboards
+
+🔄 Mock IoT data generated every 2 seconds
+
+🛠️ Tech Stack
+
+Backend → FastAPI (WebSocket + InfluxDB writer)
+
+Frontend → React (real-time dashboard UI)
+
+Database → InfluxDB 2.x (time-series storage)
+
+Visualization → Grafana (IoT dashboard + alerts)
+
+Messaging → WebSockets (real-time streaming)
+
+📂 Project Structure
+iot-dashboard/
+│── backend/          # FastAPI backend (IoT data simulator + API + InfluxDB writer)
+│── frontend/         # React dashboard UI
+│── grafana/          # Dashboard JSON file
+│── README.md
