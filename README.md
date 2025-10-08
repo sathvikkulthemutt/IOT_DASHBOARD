@@ -25,12 +25,13 @@ Visualization → Grafana
 Messaging → WebSockets
 
 ## 📂 Project Structure:
+```
 iot-dashboard/
 │── backend/ # FastAPI backend (IoT simulator + API + InfluxDB writer)
 │── frontend/ # React dashboard UI
 │── grafana/ # Grafana dashboard JSON file
 │── README.md
-
+```
 
 ## ⚙️ Setup & Run Locally (copy and paste commands in terminal):
 ```bash
